@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAYA | The Essence of Thai</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Inter:wght@200;300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f9f9f7;
+            --text: #1a1a1a;
+            --accent: #8d7b68;
+            /* สีโทนน้ำตาลหม่นแบบธรรมชาติ */
+            --border: rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+            /* ทำให้สีเมนูเปลี่ยนตามพื้นหลังอัตโนมัติ */
+            color: white;
+        }
+
+        .brand {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.8rem;
+            letter-spacing: 5px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        .menu-toggle {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-video-wrap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 60vh;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 0.9;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+
+        .hero h1 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* --- Content Section --- */
+        .section {
+            padding: 150px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .split {
+            display: flex;
+            align-items: center;
+            gap: 100px;
+            margin-bottom: 200px;
+        }
+
+        .split:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .split-img {
+            flex: 1;
+            height: 600px;
+            overflow: hidden;
+            background: #eee;
+        }
+
+        .split-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .split:hover .split-img img {
+            transform: scale(1.05);
+        }
+
+        .split-text {
+            flex: 1;
+        }
+
+        .split-text span {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .split-text h2 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3rem;
+            margin: 20px 0;
+            font-weight: 400;
+        }
+
+        .split-text p {
+            font-weight: 200;
+            line-height: 2;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .btn-minimal {
+            display: inline-block;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--text);
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .btn-minimal:hover {
+            padding-right: 20px;
+            border-bottom-color: var(--accent);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 100px 10%;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            list-style: none;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .split {
+                flex-direction: column !important;
+                gap: 40px;
+            }
+
+            .hero-video-wrap {
+                width: 95vw;
+                height: 50vh;
+            }
+
+            nav {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="brand">MAYA</div>
+        <div class="menu-toggle">Reserve / Menu</div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-video-wrap">
+            <video autoplay muted loop playsinline>
+                <source src="../assets/4253333-uhd_2160_4096_25fps.mp4"
+                    type="video/mp4">
+            </video>
+        </div>
+        <p data-reveal>Fine Thai Dining</p>
+        <h1 data-reveal>Simplicity is<br>the ultimate Luxury</h1>
+    </section>
+
+    <section class="section">
+
+        <div class="split">
+            <div class="split-img">
+                <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?auto=format&fit=crop&w=1000&q=80"
+                    alt="Dish">
+            </div>
+            <div class="split-text">
+                <span>Origin</span>
+                <h2>แกงเขียวหวาน<br>เนื้อวากิว</h2>
+                <p>ความเรียบง่ายที่เกิดจากการเคี่ยวเข็ญ เครื่องแกงโขลกมือและเนื้อวากิวระดับ A5 ที่ละลายในปาก
+                    คือนิยามของความสุขที่ Maya</p>
+                <a href="#" class="btn-minimal">DISCOVER MORE</a>
+            </div>
+        </div>
+
+        <div class="split">
+            <div class="split-img">
+                <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=710&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Dish">
+            </div>
+            <div class="split-text">
+                <span>The Art of Thai</span>
+                <h2>วิจิตรตระการ<br>แห่งรสชาติ</h2>
+                <p>ทุกจานคือการเดินทางของวัตถุดิบ จากท้องถิ่นสู่โต๊ะอาหารที่ถูกจัดวางราวกับงานประติมากรรม</p>
+                <a href="#" class="btn-minimal">VIEW GALLERY</a>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="brand">MAYA</div>
+        <ul class="footer-links">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Journal</a></li>
+        </ul>
+        <p style="font-size: 0.7rem; color: #ccc;">© 2025 MAYA DINING GROUP. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        // Smooth Reveal Animation on Scroll
+        const reveals = document.querySelectorAll('[data-reveal]');
+
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        reveals.forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(30px)";
+            el.style.transition = "all 1.2s cubic-bezier(0.19, 1, 0.22, 1)";
+            observer.observe(el);
+        });
+
+        // Parallax Effect for Video
+        window.addEventListener('scroll', () => {
+            const video = document.querySelector('video');
+            let scroll = window.pageYOffset;
+            video.style.transform = `translateY(${scroll * 0.3}px)`;
+        });
+    </script>
+</body>
+
+</html>

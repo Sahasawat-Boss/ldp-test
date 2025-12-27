@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rattanakosin Table | Thai Heritage Cuisine</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Prompt:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #c7a24b;
+            --dark: #0a0a0a;
+            --soft: #151515;
+            --cream: #f4f1e8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: var(--dark);
+            color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        section {
+            padding: 140px 8%
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            min-height: 100vh;
+        }
+
+        .hero video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(.55);
+        }
+
+        .hero-content {
+            padding: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(to bottom, #0a0a0a, #141414);
+        }
+
+        .hero-line {
+            font-size: clamp(2.8rem, 5vw, 4.8rem);
+            color: var(--gold);
+            line-height: 1.1;
+            overflow: hidden;
+        }
+
+        .hero-line span {
+            display: inline-block;
+            transform: translateY(120%);
+            animation: revealText 1.2s ease forwards;
+        }
+
+        .hero-line:nth-child(1) span {
+            animation-delay: .2s
+        }
+
+        .hero-line:nth-child(2) span {
+            animation-delay: .4s
+        }
+
+        .hero-line:nth-child(3) span {
+            animation-delay: .6s
+        }
+
+        @keyframes revealText {
+            to {
+                transform: none
+            }
+        }
+
+        .hero p {
+            margin-top: 30px;
+            max-width: 520px;
+            opacity: 0;
+            animation: fadeUp 1.2s ease forwards;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .btn {
+            margin-top: 50px;
+            width: max-content;
+            padding: 14px 38px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: .4s;
+        }
+
+        .btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* ===== PHILOSOPHY ===== */
+        .philosophy {
+            background: var(--soft);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 90px;
+            align-items: center;
+        }
+
+        .philosophy img {
+            width: 100%;
+            transform: scale(1.1);
+            transition: 1.6s ease;
+        }
+
+        .philosophy.reveal-active img {
+            transform: none;
+        }
+
+        .philosophy h2 {
+            color: var(--gold);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .philosophy p {
+            opacity: .85;
+        }
+
+        /* ===== MENU ===== */
+        .menu-title {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .menu-title h2 {
+            font-size: 3.2rem;
+            color: var(--gold);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 80px;
+        }
+
+        .menu-item {
+            overflow: hidden;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            transition: 1.2s ease;
+            filter: brightness(.9);
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .menu-item h3 {
+            color: var(--gold);
+            margin-top: 25px;
+            font-size: 1.6rem;
+        }
+
+        .menu-item p {
+            opacity: .85;
+            margin-top: 8px;
+        }
+
+        /* ===== PARALLAX ===== */
+        .parallax {
+            height: 65vh;
+            background: url('https://images.unsplash.com/photo-1552566626-52f8b828add9') center/cover fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax h2 {
+            font-size: 3.2rem;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 30px 70px;
+            background: rgba(0, 0, 0, .55);
+        }
+
+        /* ===== REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: 1.3s cubic-bezier(.19, 1, .22, 1);
+        }
+
+        .reveal.reveal-active {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 50px;
+            text-align: center;
+            background: #070707;
+            opacity: .7;
+        }
+
+        @media(max-width:900px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .hero-content {
+                padding: 70px
+            }
+
+            .philosophy {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline>
+            <source src="../assets/4253333-uhd_2160_4096_25fps.mp4">
+        </video>
+
+        <div class="hero-content">
+            <div class="hero-line"><span>Rattanakosin</span></div>
+            <div class="hero-line"><span>Table</span></div>
+            <div class="hero-line"><span>Heritage Cuisine</span></div>
+
+            <p>
+                ครัวไทยที่ยึดมั่นในรากวัฒนธรรม
+                ถ่ายทอดความประณีตแบบชาววัง
+                สู่ประสบการณ์ร่วมสมัยระดับสากล
+            </p>
+
+            <a href="#menu" class="btn">EXPERIENCE MENU</a>
+        </div>
+    </section>
+
+    <section class="philosophy reveal">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+        <div>
+            <h2>Thai Culinary Philosophy</h2>
+            <p>
+                เราเชื่อว่าอาหารไทยคือมรดก
+                ไม่เร่ง ไม่ลดขั้นตอน
+                ทุกจานสะท้อนความเคารพในวัตถุดิบและเวลา
+            </p>
+        </div>
+    </section>
+
+    <section id="menu">
+        <div class="menu-title reveal">
+            <h2>Signature Selection</h2>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=710&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                <h3>Tom Yum Lobster</h3>
+                <p>สมุนไพรไทย กลิ่นหอมลึก และความสมดุล</p>
+            </div>
+
+            <div class="menu-item reveal">
+                <img src="https://images.unsplash.com/photo-1604908177522-4729fcbfdd7c">
+                <h3>Massaman Wagyu</h3>
+                <p>เคี่ยวช้าเพื่อรสชาติที่ลุ่มลึก</p>
+            </div>
+
+            <div class="menu-item reveal">
+                <img src="https://images.unsplash.com/photo-1601050690190-9f5e0e68e2d6">
+                <h3>Royal Pad Thai</h3>
+                <p>สมดุล รสชาติ และสัมผัส</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="parallax">
+        <h2>More Than a Meal</h2>
+    </section>
+
+    <footer>
+        © 2025 Rattanakosin Table — Thai Heritage Cuisine
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('reveal-active')
+                }
+            })
+        }, { threshold: .2 })
+
+        document.querySelectorAll('.reveal,.philosophy').forEach(el => observer.observe(el))
+    </script>
+
+</body>
+
+</html>

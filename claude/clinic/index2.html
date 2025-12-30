@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beauty Clinic - คลินิกเสริมความงาม</title>
+    <title>Beauty Clinic - คลินิกเสริมความงามระดับพรีเมี่ยม</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,187 +14,547 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Prompt', sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: #2d3748;
+            overflow-x: hidden;
         }
 
+        /* Navbar */
         .navbar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 0;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            padding: 0 3rem;
         }
 
         .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar.scrolled .logo {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
             list-style: none;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
-            transition: opacity 0.3s;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .nav-links a:hover {
-            opacity: 0.8;
+        .navbar.scrolled .nav-links a {
+            color: #2d3748;
+            text-shadow: none;
         }
 
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ec4899, #8b5cf6);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Video Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 150px 2rem 100px;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.7), rgba(139, 92, 246, 0.7), rgba(59, 130, 246, 0.6));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            margin-top: 60px;
+            color: white;
+            padding: 0 2rem;
+            max-width: 1000px;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
             animation: fadeInUp 1s 0.2s both;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-weight: 300;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: white;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
             animation: fadeInUp 1s 0.4s both;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        .btn-primary {
+            padding: 18px 45px;
+            background: white;
+            color: #ec4899;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.3);
         }
 
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: white;
+        }
+
+        .btn-secondary {
+            padding: 18px 45px;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid white;
+            transition: all 0.4s ease;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #8b5cf6;
+            transform: translateY(-5px);
+        }
+
+        /* Services Section */
         .services {
-            padding: 80px 2rem;
-            background: #f8f9fa;
+            padding: 120px 3rem;
+            background: linear-gradient(180deg, #faf5ff 0%, #fff 100%);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 4rem;
+            font-weight: 300;
         }
 
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
 
         .service-card {
             background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
         }
 
         .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .service-card h3 {
-            color: #667eea;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
         }
 
+        .service-card p {
+            color: #64748b;
+            line-height: 1.8;
+        }
+
+        /* About Section */
         .about {
-            padding: 80px 2rem;
+            padding: 120px 3rem;
+            background: white;
         }
 
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 6rem;
             align-items: center;
         }
 
         .about-image {
             width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
+            height: 550px;
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
         }
 
-        .testimonials {
-            padding: 80px 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .about-text p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
             color: white;
+            flex-shrink: 0;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 120px 3rem;
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .testimonials .section-title,
+        .testimonials .section-subtitle {
+            color: white;
+            background: none;
+            -webkit-text-fill-color: white;
         }
 
         .testimonial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .testimonial-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3rem;
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-10px);
         }
 
         .stars {
-            color: #ffd700;
-            margin-bottom: 1rem;
+            color: #fbbf24;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
+        .testimonial-card p {
+            color: white;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #8b5cf6;
+        }
+
+        /* Gallery */
+        .gallery {
+            padding: 120px 3rem;
+            background: #faf5ff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            height: 350px;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4);
+        }
+
+        .gallery-item::after {
+            content: 'ดูรายละเอียด';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            font-weight: 600;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover::after {
+            transform: translateY(0);
+        }
+
+        /* Contact Section */
         .contact {
-            padding: 80px 2rem;
-            background: #f8f9fa;
+            padding: 120px 3rem;
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .contact-info p {
+            color: #64748b;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
         }
 
         .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
+            background: linear-gradient(135deg, #faf5ff, #fff);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.1);
         }
 
         .form-group {
@@ -203,47 +564,110 @@
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 18px 25px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            font-family: 'Prompt', sans-serif;
+            background: white;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
         }
 
         .submit-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 18px;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
             color: white;
             border: none;
-            border-radius: 50px;
+            border-radius: 15px;
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.4s ease;
+            font-family: 'Prompt', sans-serif;
         }
 
         .submit-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
         }
 
+        /* Footer */
         footer {
-            background: #333;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
             color: white;
-            text-align: center;
-            padding: 2rem;
+            padding: 4rem 3rem 2rem;
         }
 
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 1.3rem;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
 
             to {
@@ -252,18 +676,65 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
             }
 
-            .about-content {
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .about-content,
+            .contact-container {
                 grid-template-columns: 1fr;
             }
 
             .nav-links {
                 display: none;
             }
+
+            .service-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -276,97 +747,123 @@
                 <li><a href="#home">หน้าแรก</a></li>
                 <li><a href="#services">บริการ</a></li>
                 <li><a href="#about">เกี่ยวกับเรา</a></li>
+                <li><a href="#gallery">ผลงาน</a></li>
                 <li><a href="#contact">ติดต่อ</a></li>
             </ul>
         </div>
     </nav>
 
     <section id="home" class="hero">
-        <h1>ยกระดับความงามของคุณ</h1>
-        <p>คลินิกเสริมความงามมาตรฐานสากล ด้วยทีมแพทย์ผู้เชี่ยวชาญ</p>
-        <a href="#contact" class="btn">นัดหมายปรึกษา</a>
-    </section>
-
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">บริการของเรา</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <div class="service-icon">💉</div>
-                    <h3>โบท็อกซ์ ฟิลเลอร์</h3>
-                    <p>ลดริ้วรอย เติมเต็มร่องลึก ด้วยผลิตภัณฑ์คุณภาพจากต่างประเทศ</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">✨</div>
-                    <h3>เลเซอร์</h3>
-                    <p>กำจัดขน รักษาสิว ผิวกระจ่างใส ด้วยเทคโนโลยีล้ำสมัย</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💆</div>
-                    <h3>ดูแลผิวหน้า</h3>
-                    <p>ทรีทเมนท์หน้าใส ผิวเนียนนุ่ม สุขภาพดี</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💪</div>
-                    <h3>ปรับสัดส่วน</h3>
-                    <p>ลดไฟเบอร์ กระชับสัดส่วน ด้วยเทคโนโลยีที่ปลอดภัย</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔬</div>
-                    <h3>วิตามินผิว</h3>
-                    <p>เสริมสร้างผิวสวยจากภายใน ด้วยสูตรเฉพาะบุคคล</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">👃</div>
-                    <h3>ศัลยกรรม</h3>
-                    <p>ปรับโครงหน้า จมูก ตา โดยศัลยแพทย์ผู้เชี่ยวชาญ</p>
-                </div>
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="https://cdn.pixabay.com/video/2020/03/05/32900-397651072_large.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>ค้นพบความงามที่แท้จริง</h1>
+            <p>คลินิกเสริมความงามระดับพรีเมี่ยม ด้วยเทคโนโลยีล้ำสมัยและแพทย์ผู้เชี่ยวชาญ</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn-primary">นัดหมายฟรี</a>
+                <a href="#services" class="btn-secondary">ดูบริการ</a>
             </div>
         </div>
     </section>
 
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-image"></div>
-                <div>
-                    <h2 class="section-title">เกี่ยวกับเรา</h2>
-                    <p style="margin-bottom: 1rem;">Beauty Clinic คือคลินิกเสริมความงามที่มีมาตรฐานสากล
-                        เราให้บริการด้วยทีมแพทย์ผู้เชี่ยวชาญและเครื่องมือที่ทันสมัย</p>
-                    <p style="margin-bottom: 1rem;">เรามุ่งมั่นที่จะมอบความงามที่เป็นธรรมชาติและเหมาะสมกับคุณมากที่สุด
-                        พร้อมดูแลคุณด้วยความใส่ใจในทุกขั้นตอน</p>
-                    <p>✓ แพทย์ผู้เชี่ยวชาญ<br>✓ เครื่องมือทันสมัย<br>✓ ผลิตภัณฑ์คุณภาพ<br>✓ บริการประทับใจ</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
+    <section id="services" class="services reveal">
         <div class="container">
             <h2 class="section-title">รีวิวจากลูกค้า</h2>
+            <p class="section-subtitle">ความประทับใจจากลูกค้าของเรา</p>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p>"บริการดีมาก แพทย์ใส่ใจและให้คำแนะนำดีมากค่ะ ผลลัพธ์เป็นธรรมชาติเกินคาด"</p>
-                    <p style="margin-top: 1rem;"><strong>- คุณอารีย์</strong></p>
+                    <p>"ประทับใจมากค่ะ แพทย์ให้คำแนะนำดีมาก ผลลัพธ์เป็นธรรมชาติและสวยงามมากค่ะ บริการดีเยี่ยม
+                        จะกลับมาใช้บริการอีกแน่นอน"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">อ</div>
+                        <div>
+                            <strong>คุณอารีย์</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">โบท็อกซ์ & ฟิลเลอร์</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p>"คลินิกสะอาด ทันสมัย เครื่องมือดี แพทย์มืออาชีพ แนะนำเลยค่ะ"</p>
-                    <p style="margin-top: 1rem;"><strong>- คุณนิภา</strong></p>
+                    <p>"คลินิกสะอาดมาก เครื่องมือทันสมัย แพทย์มืออาชีพและใส่ใจทุกรายละเอียด
+                        ราคาเหมาะสมกับคุณภาพที่ได้รับค่ะ"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">น</div>
+                        <div>
+                            <strong>คุณนิภา</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">เลเซอร์กำจัดขน</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p>"ประทับใจมากครับ ทีมงานดูแลดี ราคาเป็นมิตร จะมาใช้บริการอีกแน่นอน"</p>
-                    <p style="margin-top: 1rem;"><strong>- คุณสมชาย</strong></p>
+                    <p>"ประทับใจมากครับ ผลลัพธ์เกินคาดหมาย ทีมงานดูแลดีตั้งแต่เริ่มต้นจนจบ แนะนำเลยครับ
+                        คุ้มค่ามากกับเงินที่จ่ายไป"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ส</div>
+                        <div>
+                            <strong>คุณสมชาย</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">ปรับสัดส่วนกาย</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="gallery" class="gallery reveal">
         <div class="container">
-            <h2 class="section-title">ติดต่อเรา</h2>
+            <h2 class="section-title">ผลงาน</h2>
+            <p class="section-subtitle">ผลลัพธ์ที่น่าประทับใจจากลูกค้าของเรา</p>
+            <div class="gallery-grid">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact reveal">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>ติดต่อเรา</h2>
+                <p>พร้อมให้คำปรึกษาและตอบทุกคำถาม ติดต่อเราได้ทุกช่องทาง เราจะดูแลคุณด้วยความใส่ใจ</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>ที่อยู่</strong>
+                            <p style="color: #64748b;">123 ถนนสุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพฯ 10110</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>โทรศัพท์</strong>
+                            <p style="color: #64748b;">02-XXX-XXXX, 095-XXX-XXXX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <strong>อีเมล</strong>
+                            <p style="color: #64748b;">info@beautyclinic.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕐</div>
+                        <div>
+                            <strong>เวลาทำการ</strong>
+                            <p style="color: #64748b;">จันทร์ - เสาร์: 10:00 - 20:00<br>อาทิตย์: 10:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <form class="contact-form" onsubmit="handleSubmit(event)">
                 <div class="form-group">
                     <input type="text" placeholder="ชื่อ-นามสกุล" required>
@@ -386,17 +883,55 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 Beauty Clinic. All rights reserved.</p>
-        <p>📍 123 ถนนสุขุมวิท กรุงเทพฯ | ☎️ 02-XXX-XXXX | 📧 info@beautyclinic.com</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Beauty Clinic</h3>
+                <p>คลินิกเสริมความงามระดับพรีเมี่ยมที่คุณวางใจได้</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">📘</a>
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">🐦</a>
+                    <a href="#" class="social-icon">📺</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>บริการ</h3>
+                <a href="#services">โบท็อกซ์ & ฟิลเลอร์</a>
+                <a href="#services">เลเซอร์ขั้นสูง</a>
+                <a href="#services">ทรีทเมนต์ผิวหน้า</a>
+                <a href="#services">ปรับสัดส่วนกาย</a>
+            </div>
+            <div class="footer-section">
+                <h3>เมนู</h3>
+                <a href="#home">หน้าแรก</a>
+                <a href="#about">เกี่ยวกับเรา</a>
+                <a href="#gallery">ผลงาน</a>
+                <a href="#contact">ติดต่อเรา</a>
+            </div>
+            <div class="footer-section">
+                <h3>ติดต่อ</h3>
+                <p>📍 123 ถนนสุขุมวิท กรุงเทพฯ</p>
+                <p>📞 02-XXX-XXXX</p>
+                <p>📧 info@beautyclinic.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Beauty Clinic. All rights reserved. | Design with ❤️</p>
+        </div>
     </footer>
 
     <script>
-        function handleSubmit(e) {
-            e.preventDefault();
-            alert('ขอบคุณสำหรับความสนใจ! เราจะติดต่อกลับโดยเร็วที่สุดค่ะ');
-            e.target.reset();
-        }
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -410,15 +945,123 @@
             });
         });
 
+        // Form submit
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('ขอบคุณสำหรับความสนใจ! เราจะติดต่อกลับโดยเร็วที่สุดค่ะ 💖');
+            e.target.reset();
+        }
+
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal();
+
+        // Parallax effect for hero
         window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
-            } else {
-                navbar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            const hero = document.querySelector('.hero-content');
+            const scrolled = window.pageYOffset;
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - scrolled / 500;
             }
         });
     </script>
 </body>
+</html="section-title">บริการของเรา</h2>
+<p class="section-subtitle">ครบครันด้วยเทคโนโลยีทันสมัยและทีมแพทย์ผู้เชี่ยวชาญ</p>
+<div class="service-grid">
+    <div class="service-card">
+        <div class="service-icon">💉</div>
+        <h3>โบท็อกซ์ & ฟิลเลอร์</h3>
+        <p>ลดริ้วรอย เติมเต็มความอิ่มเอิบ ด้วยผลิตภัณฑ์ออริจินอลจากต่างประเทศ พร้อมเทคนิคการฉีดที่เป็นธรรมชาติ</p>
+    </div>
+    <div class="service-card">
+        <div class="service-icon">✨</div>
+        <h3>เลเซอร์ขั้นสูง</h3>
+        <p>กำจัดขนถาวร รักษาสิว ผิวกระจ่างใส ด้วยเครื่องเลเซอร์เกรดพรีเมี่ยมที่ปลอดภัยและมีประสิทธิภาพ</p>
+    </div>
+    <div class="service-card">
+        <div class="service-icon">💆</div>
+        <h3>ทรีทเมนต์ผิวหน้า</h3>
+        <p>บำรุงผิวให้สุขภาพดี กระจ่างใส เนียนนุ่ม ด้วยผลิตภัณฑ์คุณภาพและเทคนิคการดูแลเฉพาะบุคคล</p>
+    </div>
+    <div class="service-card">
+        <div class="service-icon">💪</div>
+        <h3>ปรับสัดส่วนกาย</h3>
+        <p>ลดไขมันส่วนเกิน กระชับสัดส่วน สร้างกล้ามเนื้อ ด้วยเทคโนโลยีที่ไม่ต้องผ่าตัด ปลอดภัยไร้แผลเป็น</p>
+    </div>
+    <div class="service-card">
+        <div class="service-icon">🔬</div>
+        <h3>วิตามินผิวและอาหารเสริม</h3>
+        <p>เสริมสร้างผิวสวยจากภายใน ด้วยสูตรออกแบบเฉพาะบุคคล เหมาะกับผิวและความต้องการของคุณ</p>
+    </div>
+    <div class="service-card">
+        <div class="service-icon">👃</div>
+        <h3>ศัลยกรรมความงาม</h3>
+        <p>ปรับโครงหน้า จมูก ตา หน้าอก โดยศัลยแพทย์ผู้เชี่ยวชาญ พร้อมการดูแลตลอด 24 ชั่วโมง</p>
+    </div>
+</div>
+</div>
+</section>
 
-</html>
+<section id="about" class="about reveal">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-image"></div>
+            <div class="about-text">
+                <h2>เกี่ยวกับเรา</h2>
+                <p>Beauty Clinic คือคลินิกเสริมความงามที่มีมาตรฐานระดับสากล
+                    เราให้บริการด้วยทีมแพทย์ผู้เชี่ยวชาญที่มีประสบการณ์มากกว่า 15 ปี</p>
+                <p>เรามุ่งมั่นที่จะมอบความงามที่เป็นธรรมชาติและเหมาะสมกับคุณมากที่สุด
+                    ด้วยเทคโนโลยีที่ทันสมัยและการดูแลที่ใส่ใจในทุกรายละเอียด</p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">👨‍⚕️</div>
+                        <div>
+                            <strong>แพทย์ผู้เชี่ยวชาญ</strong>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">ประสบการณ์ 15+ ปี</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🏆</div>
+                        <div>
+                            <strong>มาตรฐานสากล</strong>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">รับรองโดย FDA</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔬</div>
+                        <div>
+                            <strong>เทคโนโลยีทันสมัย</strong>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">อุปกรณ์นำเข้า</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💎</div>
+                        <div>
+                            <strong>ผลิตภัณฑ์คุณภาพ</strong>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">ของแท้ 100%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials" class="testimonials reveal">
+    <div class="container">
+        <h2 class
